@@ -106,3 +106,28 @@ end
         head
 
     end
+
+class Solution
+    # @param a : head node of linked list
+    # @return the head node in the linked list
+    def insertionSortList(a)
+        current = a
+        placeholder = ListNode.new(nil)
+        previous = placeholder
+        next_node = ListNode.new(nil)
+
+        while !current.nil? do
+            next_node = current.next
+            while(!previous.next.nil? && previous.next.data < current.data) do
+                previous = previous.next
+            end
+
+            current.next = previous.next
+            previous.next = current
+            previous = placeholder
+            current  = next_node
+
+        end
+        placeholder.next
+    end
+end
