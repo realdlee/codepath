@@ -1,0 +1,78 @@
+class Solution
+    # @param a : array of integers
+    # @return an array of array of integers
+    def permute(a)
+        pm = []
+	    recurse(a, 0, pm)
+	    pm.uniq
+    end
+
+    def recurse(a, index, p)
+	    if index == a.length - 1
+		    return p << a
+	    end
+	    index.upto(a.length - 1) do |x|
+		    copy = a.dup
+		    copy[index], copy[x] = copy[x], copy[index]
+		    recurse(copy, index + 1, p)
+	    end
+    end
+end
+
+class Solution
+    KEYS = [
+        ["0"],
+        ["1"],
+        ['a','b','c'],
+        ['d','e','f'],
+        ['g','h', 'i'],
+        ['j','k','l'],
+        ['m','n','o'],
+        ['p', 'q','r','s'],
+        ['t','u','v'],
+        ['w','x','y','z']
+     ]
+
+    # @param a : string
+    # @return an array of strings
+    def letterCombinations(a)
+
+        arr = []
+        if(a.nil? || a == '')
+            return arr
+        end
+        combo(arr, a, '')
+        arr.sort
+    end
+
+    def combo(arr, numbers, str)
+        if numbers.length == 0
+            return arr.unshift(str)
+        end
+
+        KEYS[numbers[0].to_i].each do |x|
+            combo(arr, numbers[1..-1], str + x)
+        end
+    end
+end
+
+public class Solution {
+	public int numSetBits(long a) {
+	    int count = 0;
+	    String str = Long.toBinaryString(a);
+	    for(int i=0; i < str.length(); i++) {
+	        if(str.charAt(i) == '1') {
+	            count++;
+	        }
+	    }
+	    return count;
+	}
+}
+
+class Solution
+    # @param a : constant array of integers
+    # @return an integer
+    def singleNumber(a)
+        a.inject(0, :^)
+    end
+end
