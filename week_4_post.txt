@@ -1,0 +1,141 @@
+class Solution
+    # @param a : array of integers
+    # @return an integer
+    def findMinXor(a)
+        candidates = []
+        a.each_with_index do |x, i|
+            a.each_with_index do |y, i2|
+                if i!=i2
+                    candidates << (x^y)
+                end
+            end
+        end
+        candidates.min
+    end
+end
+
+class Solution
+    # @param a : array of integers
+    # @return an integer
+    def findMinXor(a)
+        a = a.sort
+        min = 39999
+        0.upto(a.length - 2) do |x|
+            min = [a[x]^a[x+1], min].min
+        end
+        min
+    end
+end
+
+public class Solution {
+	public long reverse(long a) {
+	    long ans = 0;
+	    for(int i=0; i<32; i++) {
+	        ans += a & 1;
+	        a >>>= 1;
+	        if (i < 31) {
+	            ans <<= 1;
+	        }
+	    }
+	    return ans;
+	}
+}
+
+class Solution
+    # @param a : integer
+    # @param b : integer
+    # @return an array of array of integers
+    def combine(a,b)
+        results = []
+        return [] if a < 1 || b < 1 || b > a
+
+        run(a, b, 1, [], results)
+        results
+    end
+
+    def run(a, b, start, candidate, results)
+        if(b == 0)
+            results.push(candidate)
+            return
+        end
+
+        start.upto(a) do |x|
+            candidate.push(x)
+            run(a, b - 1, start + 1, candidate, results)
+            candidate.pop
+        end
+    end
+end
+
+class Solution
+    # @param a : integer
+    # @return an array of strings
+    def generateParenthesis(a)
+        list = []
+        helper(list, "", 0, 0 , a)
+        list
+    end
+
+    def helper(list, candidate, open_paren_count, close_paren_count, a)
+        if candidate.length == a * 2
+            list << candidate
+            return
+        end
+
+        if(open_paren_count < a)
+            helper(list, candidate + "(", open_paren_count + 1, close_paren_count, a)
+        end
+        if(close_paren_count < open_paren_count)
+            helper(list, candidate + ")", open_paren_count, close_paren_count + 1, a)
+        end
+    end
+end
+
+
+def pascalTriangle(k)
+  answers = []
+  k.times {|a| pascal(a, answers) }
+  answers.map {|x| puts x.join(" ")}
+end
+
+def pascal(k, ans)
+    if k == 0
+        ans << [1]
+    elsif k == 1
+        ans << [1,1]
+    else
+        previous = ans[-1]
+        answer = [1]
+        0.upto(previous.length - 2) do |y|
+            answer << (previous[y] + previous[y+1])
+        end
+        answer << 1
+        ans << answer
+    end
+end
+
+def isPossible(a, b, c, d)
+  if a == c && b == d
+      "Yes"
+  elsif a < c && b < d
+      isPossible(a + b, b, c, d)
+      isPossible(a, a + b, c, d)
+  else
+      "No"
+  end
+end
+
+
+def isPossible(a, b, c, d)
+    isP(a,b,c,d) ? "Yes" : "No"
+end
+
+def isP(a, b, c, d)
+  if a == c && b == d
+      true
+  elsif a <= c && b <= d
+      isP(a + b, b, c, d) || isP(a, a + b, c, d)
+  else
+      false
+  end
+end
